@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcrypt = require("bcrypt");
 const userSchema = new mongoose.Schema({
   name: { type: String, required: [true, "Please enter name"] },
   email: {
@@ -24,6 +25,10 @@ const userSchema = new mongoose.Schema({
   resetPasswordToken: String,
   resetPasswordTokenExpire: Date,
   createdAt: { type: Date, default: Date.now },
+});
+
+userSchema.pre("save", async function (next) {
+  this.password = await bcrypt.hash(this.password, 10);
 });
 
 let model = mongoose.model("user", userSchema);
