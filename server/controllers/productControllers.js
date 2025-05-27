@@ -6,9 +6,12 @@ const APIFeatures = require("../utils/APIFeature");
 // @desc create Product
 // @route /api/v1/product
 exports.getProduct = async (req, res, next) => {
-  const resPerPage=2
+  const resPerPage = 2;
 
-  const apiFeatures = new APIFeatures(Product.find(), req.query).search().filter().paginate(resPerPage);
+  const apiFeatures = new APIFeatures(Product.find(), req.query)
+    .search()
+    .filter()
+    .paginate(resPerPage);
   const product = await apiFeatures.query;
 
   res.status(200).json({
@@ -22,6 +25,7 @@ exports.getProduct = async (req, res, next) => {
 // @route /api/v1/product/new
 
 exports.newProduct = catchAsyncError(async (req, res, next) => {
+  req.body.user = req.user.id;
   const product = await Product.create(req.body);
   res.status(201).json({ success: true, product });
 });
