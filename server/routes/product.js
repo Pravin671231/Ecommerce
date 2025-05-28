@@ -13,11 +13,11 @@ const {
 } = require("../middlewares/authenticate");
 
 router.route("/product").get(isAuthenticatedUser, getProduct);
-router
-  .route("/product/new")
-  .post(isAuthenticatedUser, authorizeRoles("admin"), newProduct);
 router.route("/product/:id").get(getSingleProduct);
 router.route("/product/:id").put(updateProduct);
 router.route("/product/:id").delete(deleteProduct);
-
+//Admin route
+router
+  .route("/admin/product/new")
+  .post(isAuthenticatedUser, authorizeRoles("admin"), newProduct);
 module.exports = router;
