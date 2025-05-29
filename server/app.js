@@ -9,8 +9,10 @@ app.use(cookieParser());
 //routes
 const products = require("./routes/product");
 const auth = require("./routes/auth");
+const order = require("./routes/order");
 app.use("/api/v1", products);
 app.use("/api/v1/auth", auth);
+app.use("/api/v1/order", order);
 
 app.use(errorMiddlerware);
 
