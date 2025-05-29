@@ -8,7 +8,7 @@ const orderSchema = new mongoose.Schema({
     phoneNo: { type: String, required: true },
     postalCode: { type: String, required: true },
   },
-  user: { type: mongoose.Schema.ObjectId, required: true, ref: "User" },
+  user: { type: mongoose.Schema.ObjectId, required: true, ref: "user" },
   orderItems: [
     {
       name: { type: String, required: true },
