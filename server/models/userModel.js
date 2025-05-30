@@ -3,6 +3,7 @@ const validator = require("validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+const catchAsyncError = require("../middlewares/catchAsyncError");
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: [true, "Please enter name"] },
@@ -61,3 +62,5 @@ userSchema.methods.getResetToken = function () {
 
 let model = mongoose.model("user", userSchema);
 module.exports = model;
+
+
