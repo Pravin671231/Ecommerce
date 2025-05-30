@@ -4,6 +4,7 @@ const {
   getSingleOrder,
   myOrders,
   orders,
+  updateOrder,
 } = require("../controllers/orderControllers");
 const router = express.Router();
 const {
@@ -15,6 +16,9 @@ const {
 router
   .route("/orders")
   .get(isAuthenticatedUser, authorizeRoles("admin"), orders);
+router
+  .route("/:id")
+  .put(isAuthenticatedUser, authorizeRoles("admin"), updateOrder);
 //user
 router.route("/myorders").get(isAuthenticatedUser, myOrders);
 router.route("/:id").get(isAuthenticatedUser, getSingleOrder);
